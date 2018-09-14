@@ -20,5 +20,14 @@
   <i><%= @brewery.year %></i>
 </p>
 
+<% if @brewery.ratings.empty? %>
+ brewery has not yet been rated!
+<% else %>
+ <%= "Has " + pluralize(@brewery.rating_average[0], 'rating', 'ratings') + ", average " +  @brewery.rating_average[1].to_s %>
+<% end %>
+
+<br>
+<br>
+
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
 <%= link_to 'Back', breweries_path %>

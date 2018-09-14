@@ -1,0 +1,11 @@
+<h2>Create new rating</h2>
+
+<%= form_for(@rating) do |f| %>
+  <%= f.select(:beer_id) do %>
+    <% @beers.each do |b| -%>
+      <%= content_tag(:option, b.to_s, value: b.brewery_id) %>
+    <% end %>
+  <% end %>
+  score: <%= f.number_field :score %>
+  <%= f.submit %>
+<% end %>
