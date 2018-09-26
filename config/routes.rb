@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :memberships
+  resources :beer_clubs
   resources :users
 
   resource :session, only: [:new, :create, :destroy]
