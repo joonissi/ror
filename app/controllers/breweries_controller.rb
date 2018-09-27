@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
+  before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
@@ -63,18 +63,6 @@ class BreweriesController < ApplicationController
   end
 
   private
-
-  # Authenticate
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      if username == "admin" && password == "secret"
-        login_ok = true
-      else
-        login_ok = false
-      end
-      login_ok
-    end
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_brewery

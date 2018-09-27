@@ -16,6 +16,9 @@
   <% end %>
 </p>
 
+<p><%= @user.username %> favorite beer style: <%= @user.favorite_style %></p>
+<br>
+<p><%= @user.username %> favorite brewery: <%= @user.favorite_brewery %></p>
 <h2>Ratings</h2>
 <% @user.ratings.each do |rating| %>
 <ul>

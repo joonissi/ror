@@ -97,7 +97,29 @@ RSpec.describe User, type: :model do
       best = create_beer_with_rating({ user: user }, 25 )
 
       expect(user.favorite_beer).to eq(best)
-    end  
+    end
+
+    it "has method for determining favorite style" do
+      expect(user).to respond_to(:favorite_style)
+    end
+
+    it "is highest rating beers style" do
+      create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating({ user: user }, 25 )
+
+      expect(user.favorite_style).to eq("Lager")
+    end
+
+    it "has method for determining favorite brewery" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+
+    it "is highest rating brewery" do
+      create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
+      best = create_beer_with_rating({ user: user }, 25 )
+
+      expect(user.favorite_brewery).to eq("anonymous")
+    end
   end  
 end
 

@@ -3,13 +3,19 @@ require 'rails_helper'
 include Helpers
 
 describe "Beer" do
+  let!(:user) { FactoryBot.create :user }
+  let!(:brewery) { FactoryBot.create :brewery}
+
   before :each do
-    FactoryBot.create :brewery
+    #FactoryBot.create :brewery
   end
 
   describe "beer creation and editing" do
     it "can create new beer with proper name" do
+      sign_in(username: "Pekka", password: "Foobar1")
+
       visit new_beer_path
+      # save_and_open_page
 
       fill_in('beer_name', with:'Olut')
 
@@ -19,16 +25,18 @@ describe "Beer" do
     end
 
       it "cannot create new beer without name" do
-      visit new_beer_path
+        sign_in(username: "Pekka", password: "Foobar1")
+        
+        visit new_beer_path
 
-      fill_in('beer_name', with:'')
-      click_button('Create Beer')
-
-      expect(page).to have_content "Name can't be blank"
-      expect{
+        fill_in('beer_name', with:'')
         click_button('Create Beer')
-      }.to change{Beer.count}.by(0)
-    end
+
+        expect(page).to have_content "Name can't be blank"
+        expect{
+          click_button('Create Beer')
+        }.to change{Beer.count}.by(0)
+      end
 
     # it "is redirected back to signin form if wrong credentials given" do
     #   sign_in(username: "Pekka", password: "wrong")
