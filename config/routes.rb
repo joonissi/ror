@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resource :session, only: [:new, :create, :destroy]
   
+
+  get 'places', to: 'places#index'
+  post 'places', to:'places#search'
+
   get '/', to: 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'
 

@@ -24,7 +24,9 @@
       <% else %>
         <%= link_to 'sign in', new_session_path %>
         <%= link_to 'sign up', new_user_path %>
+        
       <% end %>
+      <%= link_to 'search', places_path %>
   </div>
 
     <%= yield %>
