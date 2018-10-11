@@ -5,6 +5,7 @@ include Helpers
 describe "Beer" do
   let!(:user) { FactoryBot.create :user }
   let!(:brewery) { FactoryBot.create :brewery}
+  let!(:style) { FactoryBot.create :style}
 
   before :each do
     #FactoryBot.create :brewery
@@ -18,10 +19,11 @@ describe "Beer" do
       # save_and_open_page
 
       fill_in('beer_name', with:'Olut')
-
+      
       expect{
         click_button('Create Beer')
       }.to change{Beer.count}.by(1)
+      
     end
 
       it "cannot create new beer without name" do

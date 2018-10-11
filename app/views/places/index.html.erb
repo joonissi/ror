@@ -6,6 +6,10 @@
 <% end %>
 
 <% if @places %>
+  <p>the current beer weather in <%= session[:last_search] %>
+  <% @weather.each do |w| %>
+    <p><%= w.send(:temp_c) %> celcius</p>
+  <% end %>
   <table>
     <thead>
       <% Place.rendered_fields.each do |field| %>
@@ -15,6 +19,9 @@
     <% @places.each do |place| %>
       <tr>
         <% Place.rendered_fields.each do |field| %>
+          <% if field == :name %>
+            <td><%= link_to place.send(field), place_path(place.send(:id)) %></td>
+          <% end %>
           <td><%= place.send(field) %></td>
         <% end %>
       </tr>

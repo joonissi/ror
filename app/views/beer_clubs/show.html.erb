@@ -4,6 +4,21 @@
 
 <p>Founded <%= @beer_club.founded %></p>
 
+<% if !@is_member && current_user %>
+  <%= form_for(@membership) do |f| %>
+  <%= f.hidden_field :beer_club_id %>
+  <%= f.submit value:"join the club" %>
+  <% end %>
+<% end %>
+
+<% if @is_member && current_user %>
+  <%= form_for(@membership, method: "delete") do |f| %>
+  <%= f.hidden_field :beer_club_id %>
+  <%= f.submit value: "end the membership" %>
+  <% end %>
+<% end %>
+
+
 <h2>Members</h2>
 
 <ul>

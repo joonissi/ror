@@ -10,11 +10,18 @@ FactoryBot.define do
     year { 1941 } 
   end
 
+  factory :style do
+    name { "Lager" }
+    description { "jee jee" }
+  end
+
   factory :beer do
     name { "anonymous" }
-    style { "Lager" } 
+    style
     brewery # olueeseen liittyvä panimo luodaan brewery-tehtaalla
   end
+
+
 
   factory :rating do
     beer # reittaukseen liittyvä olut luodaan beer-tehtaalla

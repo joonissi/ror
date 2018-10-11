@@ -13,11 +13,7 @@
     </div>
   <% end %>
 
-  <%= f.select(:beer_id) do %>
-    <% @beers.each do |b| -%>
-      <%= content_tag(:option, b.to_s, value: b.brewery_id) %>
-    <% end %>
-  <% end %>
+  <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id) %>
   score: <%= f.number_field :score %>
   <%= f.submit %>
 <% end %>

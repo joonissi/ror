@@ -44,7 +44,8 @@ RSpec.describe User, type: :model do
     #let(:user){ User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1" }
     let(:user) { FactoryBot.create(:user) } # tämä rivi muuttui
     let(:test_brewery) { Brewery.new name: "test", year: 2000 }
-    let(:test_beer) { Beer.create name: "testbeer", style: "teststyle", brewery: test_brewery }
+    let(:test_style) { Style.new name: "Lager", description: "jee jee" }
+    let(:test_beer) { Beer.create name: "testbeer", style: test_style, brewery: test_brewery }
 
     it "is saved" do
       expect(user).to be_valid
@@ -107,7 +108,7 @@ RSpec.describe User, type: :model do
       create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
       best = create_beer_with_rating({ user: user }, 25 )
 
-      expect(user.favorite_style).to eq("Lager")
+      expect(user.favorite_style.name).to eq("Lager")
     end
 
     it "has method for determining favorite brewery" do
