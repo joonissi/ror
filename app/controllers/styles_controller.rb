@@ -1,4 +1,6 @@
 class StylesController < ApplicationController
+  before_action :ensure_that_is_not_banned
+  before_action :ensure_that_is_admin, only: [:destroy]
   before_action :set_style, only: [:show, :edit, :update, :destroy]
 
   # GET /styles

@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  before_action :ensure_that_is_not_banned
+  
   def index
   end
 

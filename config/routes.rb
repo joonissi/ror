@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :styles
   resources :memberships
   resources :beer_clubs
-  resources :users
+  #resources :users
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
 
   resource :session, only: [:new, :create, :destroy]
   
@@ -29,6 +32,8 @@ Rails.application.routes.draw do
   resources :ratings, only: [:index, :new, :create, :destroy]
 
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

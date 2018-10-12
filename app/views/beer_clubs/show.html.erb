@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <h1><%= @beer_club.name %> <%= @beer_club.city %></h1>
 
@@ -27,5 +27,5 @@
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
-<%= link_to 'Back', beer_clubs_path %>
+<%= link_to 'Edit', edit_beer_club_path(@beer_club), class:'btn btn-primary' %>
+<%= link_to 'Back', beer_clubs_path, class:'btn btn-primary' %>

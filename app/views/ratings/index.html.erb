@@ -1,11 +1,47 @@
-<h2>List of ratings</h2>
+<h2>Ratings</h2>
 
+<div class="row">
+  <div class="col-sm-4">
+    <h3>Best beers</h3>
+    <%= render 'list', ratings: @top_beers %>
+  </div>
+  <div class="col-sm-4">
+    <h3>Best breweries</h3>
+    <%= render 'list', ratings: @top_breweries %>
+  </div>
+  <div class="col-sm-4">
+    <h3>Best styles</h3>
+    <%#= render 'list', ratings: @top_styles %>
+  </div>
+</div>
+
+<h3>Most active users</h3>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Ratings</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @top_raters.each do |rater| %>
+      <tr>
+        <td><%= link_to rater.username, rater %></td>
+        <td><%= rater.ratings.count %></td>
+        <td></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h3>Recent ratings</h3>
 <ul>
- <% @ratings.each do |rating| %>
-   <li> <%= rating.to_s %> <%= link_to rating.user.username, user_path(rating.user) %></li>
- <% end %>
+<% @ratings.each do | rating | %>
+  <li><%= rating %> by <%= rating.user.username %> at <%= rating.created_at %></li>
+<% end %>
 </ul>
 
 <p>Arvosteluja on yhteensä: <%= @ratings_count %></p>
 
-<%= link_to 'New Rating', new_rating_path %>
+<%= link_to 'New Rating', new_rating_path, class:"btn btn-primary" %>

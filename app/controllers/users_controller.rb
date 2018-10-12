@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :ensure_that_is_not_banned
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -64,6 +65,15 @@ class UsersController < ApplicationController
     else
       redirect_to "/", notice: 'You have no privileges to do that.'
     end
+  end
+
+  def toggle_activity
+    user = User.find(params[:id])
+    user.update_attribute :banned, (not user.banned)
+
+    new_status = user.banned? ? "banned" : "not banned"
+
+    redirect_to user, notice:"user banned status changed to #{new_status}"
   end
 
   private

@@ -1,10 +1,23 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
-<h1><%=@user.username%></h1>
+<h1>
+  <%=@user.username%>
+  <% if @user.banned  %>
+    <span class="badge badge-info">account closed</span>
+  <% end %>
+</h1>
+<% if !@user.banned %>
+  <%= link_to "close account", toggle_activity_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "open account", toggle_activity_user_path(@user.id), method: :post, class: "btn btn-success" %>
+<% end %>
+
+<br>
+
 <% if @user.ratings.empty? %>
  beer has not yet been rated!
 <% else %>
- <%= "Has " + pluralize(@user.rating_average[0], 'rating', 'ratings') + ", average " +  @user.rating_average[1].to_s %>
+ <%= "Has " + pluralize(@user.rating_average, 'rating', 'ratings') + ", average " +  @user.rating_average.to_s %>
 <% end %>
 
 <p>
@@ -16,9 +29,11 @@
   <% end %>
 </p>
 
-<p><%= @user.username %> favorite beer style: <%= @user.favorite_style %></p>
-<br>
-<p><%= @user.username %> favorite brewery: <%= @user.favorite_brewery %></p>
+<% if !@user.favorite_style.nil? %>
+  <p><%= @user.username %> favorite beer style: <%= @user.favorite_style.name %></p>
+  <br>
+  <p><%= @user.username %> favorite brewery: <%= @user.favorite_brewery %></p>
+<% end%>
 <h2>Ratings</h2>
 <% @user.ratings.each do |rating| %>
 <ul>
@@ -32,6 +47,6 @@
 </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Delete me', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" %>
+<%= link_to 'Delete me', @user, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', users_path, class:"btn btn-primary" %>

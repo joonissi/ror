@@ -1,7 +1,14 @@
 class RatingsController < ApplicationController
+  before_action :ensure_that_is_not_banned
+  
   def index
     @ratings = Rating.all
     @ratings_count = Rating.all.count
+    @ratings_last_five = Rating.recent
+    @top_breweries = Brewery.top 2
+    @top_beers = Beer.top 2
+    #@top_styles = Style.top 2
+    @top_raters = User.top 2
   end
 
   def new

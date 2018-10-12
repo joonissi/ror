@@ -1,4 +1,5 @@
 class MembershipsController < ApplicationController
+  before_action :ensure_that_is_not_banned
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
   # GET /memberships
