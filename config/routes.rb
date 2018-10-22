@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   post 'places', to:'places#search'
 
   get '/', to: 'breweries#index'
+
+  get 'brewerylist', to:'breweries#list'
+
+  get 'beerlist', to:'beers#list'
   get 'kaikki_bisset', to: 'beers#index'
 
   get 'signup', to: 'users#new'

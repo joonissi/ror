@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
+    # optimized SQL
+    @users = User.includes(:ratings, :beers).all
   end
 
   # GET /users/1
